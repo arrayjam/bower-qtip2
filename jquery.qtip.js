@@ -1,12 +1,12 @@
 /*
- * qTip2 - Pretty powerful tooltips - v2.0.1-111
+ * qTip2 - Pretty powerful tooltips - v2.0.1-120
  * http://qtip2.com
  *
  * Copyright (c) 2013 Craig Michael Thompson
  * Released under the MIT, GPL licenses
  * http://jquery.org/license
  *
- * Date: Wed Sep 11 2013 02:37 EST+1000
+ * Date: Wed Sep 11 2013 02:41 EST+1000
  * Plugins: tips modal viewport svg imagemap ie6
  * Styles: basic css3
  */
@@ -1842,7 +1842,7 @@ if(!$.ui) {
 }
 
 ;// qTip version
-QTIP.version = '2.0.1-111';
+QTIP.version = '2.0.1-120';
 
 // Base ID for all qTips
 QTIP.nextid = 0;
@@ -2037,7 +2037,7 @@ $.extend(Tip.prototype, {
 	_useTitle: function(corner) {
 		var titlebar = this.qtip.elements.titlebar;
 		return titlebar && (
-			corner.y === TOP || (corner.y === CENTER && this.element.position().top + (this.size[1] / 2) + options.offset < titlebar.outerHeight(TRUE))
+			corner.y === TOP || (corner.y === CENTER && this.element.position().top + (this.size[1] / 2) + this.options.offset < titlebar.outerHeight(TRUE))
 		);
 	},
 
@@ -2337,7 +2337,7 @@ $.extend(Tip.prototype, {
 		var self = this,
 			elements = this.qtip.elements,
 			tip = this.element,
-			userOffset = Math.max(0, this.options.offset),
+			userOffset = this.options.offset,
 			isWidget = this.qtip.tooltip.hasClass('ui-widget'),
 			position = {  },
 			precedance, size, corners;
@@ -2421,7 +2421,7 @@ $.extend(Tip.prototype, {
 		// Readjust offset object to make it left/top
 		if(offset.right !== undefined) { offset.left = -offset.right; }
 		if(offset.bottom !== undefined) { offset.top = -offset.bottom; }
-		offset.user = Math.max(0, this.offset);
+		offset.user = this.offset;
 
 		// Viewport "shift" specific adjustments
 		if(shift.left = (horizontal === SHIFT && !!adjust.left)) {
